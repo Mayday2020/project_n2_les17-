@@ -5,7 +5,6 @@ const dayTime = document.querySelector('#day-time'),
       time = document.querySelector('#time'),
       timeBeforeNY = document.querySelector('#timeBeforeNewYear'),
       aWeek = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-      morningOr = ['Доброе утро', 'Добрый день', 'Добрый вечер', 'Доброй ночи'],
       zero = (n) => {if (n <= 9) {n = '0' + n;} return n;};
 
 const func = () => {
@@ -51,11 +50,3 @@ const countTimer = (deadLine) => {
 };
 
 setInterval(countTimer, 1000, '1 january 2021');
-
-
-
-//setInterval(func, 1000, '1 january 2021');
-
-/*
-
-*/
