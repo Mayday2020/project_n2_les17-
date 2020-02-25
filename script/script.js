@@ -44,7 +44,7 @@ const countTimer = (deadLine) => {
     };
     updateClock();
 };
-let idInterval = setInterval(countTimer, 1000, '25 february 2020');
+let idInterval = setInterval(countTimer, 1000, '26 february 2020');
 
 
         // Меню
@@ -52,16 +52,14 @@ let idInterval = setInterval(countTimer, 1000, '25 february 2020');
 const toggleMenu = () => {
     const btnMenu = document.querySelector('.menu'),
             menu = document.querySelector('menu'),
-            closeBtn = menu.querySelector('.close-btn'),
-            menuItems = menu.querySelectorAll('ul>li');
+            menuA = menu.querySelectorAll('a');
+
     const handlerMenu = () => {
-        
             menu.classList.toggle('active-menu');
-         
     };
+
     btnMenu.addEventListener('click', handlerMenu);
-    closeBtn.addEventListener('click', handlerMenu);
-    menuItems.forEach((elem) => elem.addEventListener('click', handlerMenu));
+    menuA.forEach((elem) => elem.addEventListener('click', handlerMenu));
 };
 toggleMenu();
 
@@ -88,7 +86,6 @@ const togglePopUp = () => {
     popupBtn.forEach((elem) => {
         elem.addEventListener('click', popupOpacity);
     });
-    
     popup.addEventListener('click', (event) => {
         let target = event.target;
         if (target.classList.contains('popup-close')){
@@ -100,9 +97,6 @@ const togglePopUp = () => {
             }
         }
     });
-
-
-
 };
 togglePopUp();
 
@@ -112,6 +106,7 @@ const tabs = () => {
     const tabHeader = document.querySelector('.service-header'),        // Родитель
         tab = tabHeader.querySelectorAll('.service-header-tab'),
         tabContent = document.querySelectorAll('.service-tab');
+
     const toggleTabContent = (index) => {
         for(let i = 0; i < tabContent.length; i++) {
             if (index === i){
