@@ -270,15 +270,15 @@ dataImg();
 
         // Калькулятор
 
-const calc = (price = 100) => {
-    const calcBlock = document.querySelector('.calc-block'),
-        calcInput = calcBlock.querySelectorAll('input');
-        
-    calcInput.forEach((elem) => {
-        elem.addEventListener('input', () => {
-            elem.value = elem.value.replace(/\D/g, '');
-        });
-    });
+const calc = (price = 100) => {                                 //
+    const calcBlock = document.querySelector('.calc-block'),    //
+        calcInput = calcBlock.querySelectorAll('input');        //
+                                                                // 
+    calcInput.forEach((elem) => {                               // Валидатор
+        elem.addEventListener('input', () => {                  //
+            elem.value = elem.value.replace(/\D/g, '');         //
+        });                                                     //
+    });                                                         //
     
     const calcType = document.querySelector('.calc-type'),
         calcSquare = document.querySelector('.calc-square'),
