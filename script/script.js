@@ -268,6 +268,22 @@ const dataImg = () => {
 };
 dataImg();      
 
+        // Калькулятор
+
+const calc = () => {
+    const calcBlock = document.querySelector('.calc-block'),
+        calcInput = calcBlock.querySelectorAll('input');
+        
+    calcInput.forEach((elem) => {
+        elem.addEventListener('input', () => {
+            elem.value = elem.value.replace(/\D/g, '');
+        });
+    });
+};
+calc();
+
+
+
 });
 
 
