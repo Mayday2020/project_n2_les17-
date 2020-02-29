@@ -44,7 +44,7 @@ const countTimer = (deadLine) => {
     };
     updateClock();
 };
-let idInterval = setInterval(countTimer, 1000, '27 february 2020');
+let idInterval = setInterval(countTimer, 1000, '1 march 2020');
 
 
         // Меню
@@ -249,7 +249,24 @@ const slider = () => {
 };
 slider();
 
-        
+        // Команда
+
+const dataImg = () => {
+    const command = document.getElementById('command'),
+        img = command.querySelectorAll('.command__photo');
+
+    img.forEach((elem) => {
+        let dataSrc;
+        elem.addEventListener('mouseenter', (e) => {
+            dataSrc = event.target.src;
+            event.target.src = event.target.dataset.img;
+        });
+        elem.addEventListener('mouseout', (e) => {
+            event.target.src = dataSrc;
+        });
+    });
+};
+dataImg();      
 
 });
 
