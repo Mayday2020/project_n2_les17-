@@ -44,7 +44,7 @@ const countTimer = (deadLine) => {
     };
     updateClock();
 };
-let idInterval = setInterval(countTimer, 1000, '3 march 2020');
+let idInterval = setInterval(countTimer, 1000, '4 march 2020');
 
 
         // Меню
