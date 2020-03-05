@@ -493,7 +493,7 @@ sendFormTextarea();
 
 let formPhone = document.querySelectorAll('.form-phone');
 const showLog = function() {
-    this.value = this.value.replace(/[A-Za-zА-Яа-я]/g, '');
+    this.value = this.value.replace(/[^+\d]/g, '');
 };
 formPhone.forEach((item) => {item.addEventListener('input', showLog);});
 
@@ -501,7 +501,7 @@ formPhone.forEach((item) => {item.addEventListener('input', showLog);});
 
 let formName = document.querySelectorAll('.form-name');
 const showLog2 = function() {
-    this.value = this.value.replace(/[0-9A-Za-z]/g, '');
+    this.value = this.value.replace(/[^ А-Яа-я]/g, '');
 };
 formName.forEach((item) => {item.addEventListener('input', showLog2);});
 
