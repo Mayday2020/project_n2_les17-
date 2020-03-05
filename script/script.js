@@ -491,25 +491,23 @@ sendFormTextarea();
 
 
 
-let formPhone = document.querySelector('.form-phone');
+let formPhone = document.querySelectorAll('.form-phone');
 const showLog = function() {
-    this.value = this.value.replace(/\D/g, '');
+    this.value = this.value.replace(/[A-Za-zА-Яа-я]/g, '');
 };
-formPhone.addEventListener('input', showLog);
+formPhone.forEach((item) => {item.addEventListener('input', showLog);});
 
 
 
-
-let formName = document.querySelector('.form-name');
+let formName = document.querySelectorAll('.form-name');
 const showLog2 = function() {
-    this.value = this.value.replace(/\d/g, '');
+    this.value = this.value.replace(/[0-9A-Za-z]/g, '');
 };
-formName.addEventListener('input', showLog2);
-
+formName.forEach((item) => {item.addEventListener('input', showLog2);});
 
 
 let formMess = document.getElementById('form2-message');
-
+formMess.addEventListener('input', showLog2);
 
 
 });
