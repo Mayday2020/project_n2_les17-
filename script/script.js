@@ -1,7 +1,6 @@
 window.addEventListener('DOMContentLoaded', function(){
 'use strict';
 
-
         // Timer 
 
 const countTimer = (deadLine) => {
@@ -44,8 +43,7 @@ const countTimer = (deadLine) => {
     };
     updateClock();
 };
-let idInterval = setInterval(countTimer, 1000, '8 march 2020');
-
+let idInterval = setInterval(countTimer, 1000, '9 march 2020');
 
         // Меню
 
@@ -117,7 +115,11 @@ const sendFormPopUp = () => {
     const form = document.getElementById('form3'),
         inputs = form.querySelectorAll('input');
     const statusMessage = document.createElement('div');
-    statusMessage.style.cssText = 'font-size: 2rem; color: #FFF;';
+    statusMessage.style.cssText = 'font-size: 2rem; color: white; margin-top: 10px;';
+    const stopDiv = () => {
+        setTimeout((() => {form.removeChild(statusMessage);
+            statusMessage.style.cssText = 'background-color: none; color: white;';}), 4000);
+    };
     
     form.addEventListener('submit', (event) => {
         event.preventDefault();
@@ -130,42 +132,39 @@ const sendFormPopUp = () => {
             body[key] = val;
         });
         postData(body)
-            .then(() => {
-                statusMessage.textContent = successMessage;
+        .then((response) => {
+            console.log(response);
+            if (response.status !== 200){
+                throw new Error('status network not 200');
+            }
+            statusMessage.textContent = successMessage;
+            statusMessage.style.cssText = 'background-color: green; color: white;';
             inputs.forEach((elem) => {
-                elem.value = '';
+            elem.value = '';
             });
-            })
-            .catch((error) => {
-                statusMessage.textContent = errorMessage;
+            
+            stopDiv();
+        })
+        .catch((error) => {
+            statusMessage.textContent = errorMessage;
+            statusMessage.style.cssText = 'background-color: red; color: white;';
             console.error(error);
-            });
+            stopDiv();
+        });
+        
+        
     });
 
     const postData = (body) => {
-        return new Promise((resolve, reject) => {
-            const request = new XMLHttpRequest();
-
-        request.addEventListener('readystatechange', () => {
-            if (request.readyState !== 4){
-                return;
-            }
-            if (request.status === 200){
-                resolve();
-            } else {
-                reject(request.status);
-            }
+        return fetch('./server.php', {
+            'method': 'POST',
+            'headers': {'Content-Type': 'application/json'},
+            'body': JSON.stringify(body)
         });
-    
-        request.open('POST', './server.php');
-        request.setRequestHeader('Content-Type', 'application/json');
-        request.send(JSON.stringify(body));
-        });
+        
     };
 };
 sendFormPopUp();
-
-
 
         // Табы
 
@@ -388,53 +387,46 @@ const sendForm = () => {
     const form = document.getElementById('form1'),
         inputs = form.querySelectorAll('input');
     const statusMessage = document.createElement('div');
-    statusMessage.style.cssText = 'font-size: 2rem;';
+    statusMessage.style.cssText = 'font-size: 2rem; color: white; margin-top: 10px;';
+    const stopDiv = () => {
+        setTimeout((() => {form.removeChild(statusMessage);
+            statusMessage.style.cssText = 'background-color: none; color: white;';}), 4000);
+    };
     
     form.addEventListener('submit', (event) => {
         event.preventDefault();
         form.appendChild(statusMessage);
         statusMessage.textContent = loadMessage;
         const formData = new FormData(form);
-        let body = {};
-    
-        formData.forEach((val, key) => {
-            body[key] = val;
-        });
-        postData(body)
-            .then(() => {
+        
+        postData(formData)
+            .then((response) => {
+                if (response.status !== 200){
+                    throw new Error('status network not 200');
+                }
                 statusMessage.textContent = successMessage;
+                statusMessage.style.cssText = 'background-color: green; color: white;';
                 inputs.forEach((elem) => {
                 elem.value = '';
                 });
+                stopDiv();
             })
             .catch((error) => {
                 statusMessage.textContent = errorMessage;
+                statusMessage.style.cssText = 'background-color: red; color: white;';
                 console.error(error);
+                stopDiv();
             });
     });
 
-    const postData = (body) => {
-        return new Promise((resolve, reject) => {
-            const request = new XMLHttpRequest();
-
-        request.addEventListener('readystatechange', () => {
-            if (request.readyState !==4){
-                return;
-            }
-            if (request.status === 200){
-                resolve();
-            } else {
-                reject(request.status);
-            }
+    const postData = (formData) => {
+        return fetch('./server.php', {
+            'method': 'POST',
+            'headers': {'Content-Type': 'text/html'},
+            'body': formData
         });
-    
-        request.open('POST', './server.php');
-        request.setRequestHeader('Content-Type', 'application/json');
-        request.send(JSON.stringify(body));
-        });
+        
     };
-
-
 };
 sendForm();
 
@@ -448,49 +440,45 @@ const sendFormTextarea = () => {
     const form = document.getElementById('form2'),
         inputs = form.querySelectorAll('input');
     const statusMessage = document.createElement('div');
-    statusMessage.style.cssText = 'font-size: 2rem;';
+    statusMessage.style.cssText = 'font-size: 2rem; color: white; margin-top: 10px;';
+    const stopDiv = () => {
+        setTimeout((() => {form.removeChild(statusMessage);
+            statusMessage.style.cssText = 'font-size: 2rem; background-color: none; margin-top: 10px; color: white;';
+        }), 4000);
+    };
     
     form.addEventListener('submit', (event) => {
         event.preventDefault();
         form.appendChild(statusMessage);
         statusMessage.textContent = loadMessage;
         const formData = new FormData(form);
-        let body = {};
-    
-        formData.forEach((val, key) => {
-            body[key] = val;
-        });
-        postData(body)
-            .then(() => {
+        postData(formData)
+            .then((response) => {
+                console.log(response);
+                if (response.status !== 200){
+                    throw new Error('status network not 200');
+                }
                 statusMessage.textContent = successMessage;
-            inputs.forEach((elem) => {
+                statusMessage.style.cssText = 'background-color: green; margin-top: 10px; color: white;';
+                inputs.forEach((elem) => {
                 elem.value = '';
-            });
+                });
+                stopDiv();
             })
             .catch((error) => {
                 statusMessage.textContent = errorMessage;
+                statusMessage.style.cssText = 'background-color: red; color: white;';
                 console.error(error);
+                stopDiv();
             });
+        
     });
 
-    const postData = (body) => {
-        return new Promise((resolve, reject) => {
-            const request = new XMLHttpRequest();
-
-        request.addEventListener('readystatechange', () => {
-            if (request.readyState !== 4){
-                return;
-            }
-            if (request.status === 200){
-                resolve();
-            } else {
-                reject(request.status);
-            }
-        });
-    
-        request.open('POST', './server.php');
-        request.setRequestHeader('Content-Type', 'application/json');
-        request.send(JSON.stringify(body));
+    const postData = (formData) => {
+        return fetch('./server.php', {
+            'method': 'POST',
+            'headers': {'Content-Type': 'text/html'},
+            'body': formData
         });
     };
 
@@ -498,26 +486,28 @@ const sendFormTextarea = () => {
 };
 sendFormTextarea();
 
-
-
-let formPhone = document.querySelectorAll('.form-phone');
-const showLog = function() {
-    this.value = this.value.replace(/[^+\d]/g, '');
+        // Валидатор
+    
+const validForm = () => {
+    let formPhone = document.querySelectorAll('.form-phone');
+    const showLog = function() {
+        this.value = this.value.replace(/[^+\d]/g, '');
+    };
+    formPhone.forEach((item) => {item.addEventListener('input', showLog);});
+    
+    
+    
+    let formName = document.querySelectorAll('.form-name');
+    const showLog2 = function() {
+        this.value = this.value.replace(/[^ А-Яа-я]/g, '');
+    };
+    formName.forEach((item) => {item.addEventListener('input', showLog2);});
+    
+    
+    let formMess = document.getElementById('form2-message');
+    formMess.addEventListener('input', showLog2);
 };
-formPhone.forEach((item) => {item.addEventListener('input', showLog);});
-
-
-
-let formName = document.querySelectorAll('.form-name');
-const showLog2 = function() {
-    this.value = this.value.replace(/[^ А-Яа-я]/g, '');
-};
-formName.forEach((item) => {item.addEventListener('input', showLog2);});
-
-
-let formMess = document.getElementById('form2-message');
-formMess.addEventListener('input', showLog2);
-
+validForm();
 
 });
 
