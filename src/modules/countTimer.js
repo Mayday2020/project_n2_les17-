@@ -1,4 +1,4 @@
-const countTimer = (deadLine) => {
+const countTimer = () => {
     const timerHours = document.querySelector('#timer-hours'),
         timerMinutes = document.querySelector('#timer-minutes'),
         timerSeconds = document.querySelector('#timer-seconds');
@@ -39,15 +39,3 @@ const countTimer = (deadLine) => {
     updateClock();
 };
 export default countTimer;
-/*
-minutes = zero(minutes);
-    seconds = zero(seconds);
-    hours = zero(hours);
-    if (timeRemaining < 0) {
-        clearInterval(idInterval);
-        hours = '00';
-        minutes = '00';
-        seconds = '00';
-    }
-    return {timeRemaining, hours, minutes, seconds};
-    */

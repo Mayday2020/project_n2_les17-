@@ -16,9 +16,7 @@ const tabs = () => {
     };
         tabHeader.addEventListener('click', (event) => {
             let target = event.target;
-            console.log(target);
             target = target.closest('.service-header-tab');
-            console.log(target);
             if (target){
                 tab.forEach((item, i) => {
                     if(item === target){

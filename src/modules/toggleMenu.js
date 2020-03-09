@@ -7,7 +7,6 @@ const toggleMenu = () => {
     };
     menu.addEventListener('click', (event) => {
         let target = event.target;
-        console.log(target);
         if (target){
             menuA.forEach((item) => {
                 if(item === target){

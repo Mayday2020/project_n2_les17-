@@ -15,6 +15,10 @@ const validForm = () => {
     
     
     let formMess = document.getElementById('form2-message');
-    formMess.addEventListener('input', showLog2);
+    const showLog3 = function() {
+        this.value = this.value.replace(/[^ А-Яа-я.,]/g, '');
+    };
+   
+    formMess.addEventListener('input', showLog3);
 };
 export default validForm;

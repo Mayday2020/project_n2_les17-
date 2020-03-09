@@ -20,7 +20,6 @@ const sendFormTextarea = () => {
         const formData = new FormData(form);
         postData(formData)
             .then((response) => {
-                console.log(response);
                 if (response.status !== 200){
                     throw new Error('status network not 200');
                 }
@@ -34,7 +33,6 @@ const sendFormTextarea = () => {
             .catch((error) => {
                 statusMessage.textContent = errorMessage;
                 statusMessage.style.cssText = 'background-color: red; color: white;';
-                console.error(error);
                 stopDiv();
             });
         

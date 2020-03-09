@@ -33,7 +33,6 @@ const sendForm = () => {
             .catch((error) => {
                 statusMessage.textContent = errorMessage;
                 statusMessage.style.cssText = 'background-color: red; color: white;';
-                console.error(error);
                 stopDiv();
             });
     });
